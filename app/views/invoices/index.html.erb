@@ -1,4 +1,4 @@
 <div class="contextual">
-<%= link_to l(:label_invoice_new), {:controller => 'invoices', :action => 'new' }, :class => 'icon icon-add' %>
+<%= link_to l(:label_invoice_new), {:controller => 'invoices', :action => 'new', :project_id => @project}, :class => 'icon icon-add' %>
 </div>
 <%= title l(:invoices_list) %>

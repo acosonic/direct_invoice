@@ -18,7 +18,12 @@ Copy plugin source to plugins directory
 ```sh
 $ git clone https://github.com/acosonic/direct_invoice.git plugins/direct_invoice
 ```
+Migrate database
+```sh
+bundle exec rake redmine:plugins NAME=direct_invoice RAILS_ENV=production
+```
 Restart Redmine (if using Passenger)
 ```sh
 $ rm tmp/restart.txt && touch tmp/restart.txt
 ```
+Enable plugin as a module on per-project basis
