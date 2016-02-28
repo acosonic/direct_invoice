@@ -1,0 +1,65 @@
+<%= title l(:create_new_invoice) %>
+
+
+<div class="box tabular">
+<%= labelled_form_for Invoice.new do |f| %>
+<p> 
+  <%= f.text_field :company %></p>
+<p id="start_date_area">
+  <%= f.text_field(:date, :size => 10) %>
+  <%= calendar_for('invoice_date') %>
+</p>
+<p>
+<%= f.label "Activities:" %>
+ 	<div class="autoscroll">
+	<table class="list time-entries">
+	<thead>
+	  <tr>
+	    <th class="checkbox hide-when-print">
+	      <%= check_box_tag 'check_all', '', false, :class => 'toggle-selection',
+	        :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
+	    </th>
+	    <% @query.inline_columns.each do |column| %>
+	      <%= column_header(column) %>
+	    <% end %>
+	    <th></th>
+	  </tr>
+	</thead>
+	<tbody>
+	<% @entries.each do |entry| -%>
+	  <tr class="time-entry <%= cycle("odd", "even") %> hascontextmenu">
+	    <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", entry.id, false, :id => nil) %></td>
+	    <%= raw @query.inline_columns.map {|column| "<td class=\"#{column.css_classes}\">#{column_content(column, entry)}</td>"}.join %>
+	    <td class="buttons">
+	    <% if entry.editable_by?(User.current) -%>
+	        <%= link_to image_tag('edit.png'), edit_time_entry_path(entry),
+	                                           :title => l(:button_edit) %>
+	        <%= link_to image_tag('delete.png'), time_entry_path(entry),
+	                                             :data => {:confirm => l(:text_are_you_sure)},
+	                                             :method => :delete,
+	                                             :title => l(:button_delete) %>
+	    <% end -%>
+	    </td>
+	  </tr>
+	<% end -%>
+	</tbody>
+	</table>
+	</div>
+</p>
+<p><%= f.label "Price of work" %>
+  <%= text_field_tag 'price' %> EUR
+</p>
+<p>Now 4 custom fields of spent time...</p>
+<p>STATIC FIELD - "Issue name" - choosen based on Activities</p>
+<p>STATIC FIELD - "Solution description - service description" can be read from Time
+tracking record „description“ entry</p>
+<p>- "Technician name:" - user who owned issue from redmine</p>
+<p>STATIC FIELD - "Client response/confirmation"
+STATIC FIELD - i.e. "In case of any
+questions…please contact us as soon as possible,
+lorem ipsum, etc…"</p>
+<p>  <%= f.label "Send Email?" %>  <%= check_box_tag 'send_email', 'yes', true %></p>
+
+<p>  <%= f.submit %></p>
+<% end %>
+</div>
