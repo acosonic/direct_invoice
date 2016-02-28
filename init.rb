@@ -5,10 +5,12 @@ Redmine::Plugin.register :direct_invoice do
   version '0.1'
   url 'http://example.com/path/to/plugin'
   author_url 'http://example.com/about'
-  permission :invoices, { :invoices => [:index, :add] }, :public => true
+  permission :invoices, { :invoices => [:index, :new] }, :public => true
   menu :project_menu, :direct_invoice, { :controller => 'invoices', :action => 'index' }, :caption => 'Invoices', :after => :activity, :param => :project_id
   project_module :direct_invoice do
       permission :direct_invoice, :invoices => :index
-      permission :direct_invoice, :invoices => :add
+      permission :direct_invoice, :invoices => :new
   end
+  permission :view_invoices, :invoices => :index
+  permission :create_invoices, :invoices => :new
 end

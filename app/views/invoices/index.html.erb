@@ -1,7 +1,4 @@
 <div class="contextual">
-<%= link_to(l(:label_invoice_new),
-            new_project_news_path(@project),
-            :class => 'icon icon-add',
-            :onclick => 'showAndScrollTo("add-news", "news_title"); return false;') %>
+<%= link_to l(:label_invoice_new), {:controller => 'invoices', :action => 'new' }, :class => 'icon icon-add' %>
 </div>
 <%= title l(:invoices_list) %>
