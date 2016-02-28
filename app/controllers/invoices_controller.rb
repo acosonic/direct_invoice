@@ -3,6 +3,8 @@ class InvoicesController < ApplicationController
 
 
   def index
+    @project = Project.find(params[:project_id])
+    #@invoices = Invoices.find(:all)
   end
 
   def show

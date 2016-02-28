@@ -4,3 +4,6 @@ en:
   create_new_invoice: "Create New Invoice"
   field_date: "Date of service action"
   field_company: "Company name"
+  invoice_module: "Direct Invoice Module"
+  label_invoice_new: "New Invoice"
+  invoices_list: "List of invoices"
