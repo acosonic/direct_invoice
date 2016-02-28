@@ -1,0 +1,6 @@
+# English strings go here for Rails i18n
+en:
+  # my_label: "My label"
+  create_new_invoice: "Create New Invoice"
+  field_date: "Date of service action"
+  field_company: "Company name"
